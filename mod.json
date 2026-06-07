@@ -1,0 +1,38 @@
+{
+    "geode": "4.0.0",
+    "version": "1.0.0",
+    "id": "com.tuusuario.minuslag",
+    "name": "-Lag",
+    "developer": "TuUsuario",
+    "description": "Smooth Geometry Dash",
+
+    "settings": {
+        "ultra-low": {
+            "name": "Ultra Low Graphics",
+            "description": "Enable all performance optimizations.",
+            "type": "bool",
+            "default": true
+        },
+
+        "hide-particles": {
+            "name": "Hide Particles",
+            "description": "Disable particle effects.",
+            "type": "bool",
+            "default": true
+        },
+
+        "disable-glow": {
+            "name": "Disable Glow",
+            "description": "Disable glow effects.",
+            "type": "bool",
+            "default": true
+        },
+
+        "performance-logs": {
+            "name": "Performance Logs",
+            "description": "Enable debug logging.",
+            "type": "bool",
+            "default": false
+        }
+    }
+}
