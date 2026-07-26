@@ -4,7 +4,7 @@
 
 using namespace geode::prelude;
 
-namespace MinusLag {
+namespace LiteObject {
 
     bool ultraLow() {
         return Mod::get()->getSettingValue<bool>("ultra-low");
@@ -28,33 +28,36 @@ namespace MinusLag {
         auto gm = GameManager::sharedState();
 
         if (disableGlow()) {
+            // Example: disable glow (adjust variable ID if needed for your GD version)
             gm->setGameVariable("0058", false);
         }
 
         if (hideParticles()) {
+            // Example: disable particles
             gm->setGameVariable("0043", false);
         }
 
+        // Additional performance tweaks can be added here
         gm->setGameVariable("0036", false);
 
         if (logs()) {
-            log::info("-Lag enabled");
+            log::info("LiteObject performance mode enabled");
         }
     }
 }
 
-class $modify(MinusLagMenuLayer, MenuLayer) {
+class $modify(LiteObjectMenuLayer, MenuLayer) {
     bool init() {
         if (!MenuLayer::init()) {
             return false;
         }
 
-        MinusLag::applyPerformanceMode();
+        LiteObject::applyPerformanceMode();
         return true;
     }
 };
 
-class $modify(MinusLagPlayLayer, PlayLayer) {
+class $modify(LiteObjectPlayLayer, PlayLayer) {
     bool init(
         GJGameLevel* level,
         bool useReplay,
@@ -68,7 +71,7 @@ class $modify(MinusLagPlayLayer, PlayLayer) {
             return false;
         }
 
-        MinusLag::applyPerformanceMode();
+        LiteObject::applyPerformanceMode();
 
         return true;
     }
