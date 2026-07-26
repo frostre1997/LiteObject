@@ -31,10 +31,10 @@ jobs:
         with:
           version: latest
 
-      - name: Setup dummy Geode profile
+      - name: Setup default Geode profile
         run: |
           mkdir -p dummy_profile
-          geode profile add --name dummy dummy_profile/GeometryDash.exe win
+          geode profile add --name default dummy_profile/GeometryDash.exe win
 
       - name: Install Geode SDK (${{ env.GEODE_VERSION }})
         run: |
@@ -62,7 +62,6 @@ jobs:
           geode build \
             -p android64 \
             --config Release \
-            --profile dummy \
             --ndk "$ANDROID_NDK" \
             -- \
             -DGEODE_UNITY_BUILD=OFF
