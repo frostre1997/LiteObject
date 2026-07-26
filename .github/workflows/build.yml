@@ -82,5 +82,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.platform }}
-          path: LiteObject-${{ matrix.platform }}/*.geode
+          path: LiteObject-${{ matrix.platform }}.geode
           if-no-files-found: error
