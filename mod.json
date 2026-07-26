@@ -1,41 +1,41 @@
 {
-    "geode": "5.8.1",
-    "gd": {
-        "win": "2.2081",
-        "android": "2.2081",
-        "mac": "2.2081",
-        "ios": "2.2081"
+  "geode": "5.8.1",
+  "gd": {
+    "win": "2.2081",
+    "android": "2.2081",
+    "mac": "2.2081",
+    "ios": "2.2081"
+  },
+  "version": "1.0.0",
+  "id": "frostre1997.LiteObject",
+  "name": "LiteObject",
+  "developer": "frostre1997",
+  "description": "Reduce unnecessary visual effects to improve FPS, stability, and smoothness in Geometry Dash. Targets high object count overhead (glow, particles, heavy effects).",
+  "tags": ["performance", "graphics", "fps", "glow", "particles", "android"],
+  "settings": {
+    "ultra-low": {
+      "name": "Ultra Low Graphics",
+      "type": "bool",
+      "default": true,
+      "description": "Enable all performance optimizations."
     },
-    "version": "1.0.0",
-    "id": "frostre1997.LiteObject",
-    "name": "LiteObject",
-    "developer": "frostre1997",
-    "description": "Reduce unnecessary visual effects to improve FPS, stability, and smoothness in Geometry Dash. Targets high object count overhead (glow, particles, heavy effects).",
-    "tags": ["performance", "graphics", "fps", "glow", "particles", "android"],
-    "settings": {
-        "ultra-low": {
-            "name": "Ultra Low Graphics",
-            "type": "bool",
-            "default": true,
-            "description": "Enable all performance optimizations."
-        },
-        "hide-particles": {
-            "name": "Hide Particles",
-            "type": "bool",
-            "default": true,
-            "description": "Disable particle effects."
-        },
-        "disable-glow": {
-            "name": "Disable Glow",
-            "type": "bool",
-            "default": true,
-            "description": "Disable glow effects."
-        },
-        "performance-logs": {
-            "name": "Performance Logs",
-            "type": "bool",
-            "default": false,
-            "description": "Enable debug logging for performance."
-        }
+    "hide-particles": {
+      "name": "Hide Particles",
+      "type": "bool",
+      "default": true,
+      "description": "Disable particle effects."
+    },
+    "disable-glow": {
+      "name": "Disable Glow",
+      "type": "bool",
+      "default": true,
+      "description": "Disable glow effects."
+    },
+    "performance-logs": {
+      "name": "Performance Logs",
+      "type": "bool",
+      "default": false,
+      "description": "Enable debug logging for performance."
     }
+  }
 }
