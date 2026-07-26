@@ -28,16 +28,13 @@ namespace LiteObject {
         auto gm = GameManager::sharedState();
 
         if (disableGlow()) {
-            // Example: disable glow (adjust variable ID if needed for your GD version)
             gm->setGameVariable("0058", false);
         }
 
         if (hideParticles()) {
-            // Example: disable particles
             gm->setGameVariable("0043", false);
         }
 
-        // Additional performance tweaks can be added here
         gm->setGameVariable("0036", false);
 
         if (logs()) {
