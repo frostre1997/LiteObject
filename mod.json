@@ -9,6 +9,11 @@
     "developer": "frostre1997",
     "description": "Reduce unnecessary visual effects to improve FPS, stability, and smoothness in Geometry Dash. Targets high object count overhead (glow, particles, heavy effects).",
     "tags": ["performance", "graphics", "fps", "glow", "particles", "android"],
+    "platforms": {
+        "android": {
+            "binary": "frostre1997.Lite_Object.android64.so"
+        }
+    },
     "settings": {
         "ultra-low": {
             "name": "Ultra Low Graphics",
