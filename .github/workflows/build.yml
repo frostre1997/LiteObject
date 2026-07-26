@@ -7,7 +7,7 @@ on:
       - "**"
 
 jobs:
-  build-android:
+  build-android64:
     name: android64
     runs-on: ubuntu-latest
 
@@ -40,7 +40,10 @@ jobs:
         run: |
           geode sdk install "$GEODE_SDK"
           geode sdk update ${{ env.GEODE_VERSION }}
-          geode sdk install-binaries --platform android64 --version ${{ env.GEODE_VERSION }}
+          geode sdk install-binaries \
+            --profile dummy \
+            --platform android64 \
+            --version ${{ env.GEODE_VERSION }}
 
       - name: Download Android NDK r28
         run: |
@@ -62,6 +65,7 @@ jobs:
           geode build \
             -p android64 \
             --config Release \
+            --profile dummy \
             --ndk "$ANDROID_NDK" \
             -- \
             -DGEODE_UNITY_BUILD=OFF
