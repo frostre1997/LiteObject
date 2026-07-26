@@ -1,4 +1,4 @@
-name: Build Geode Mod
+name: Build Geode Mod (Android)
 
 on:
   workflow_dispatch:
@@ -7,41 +7,80 @@ on:
       - "**"
 
 jobs:
-  build:
+  build-android:
+    name: ${{ matrix.platform }}
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        config:
-          - name: Android64
-            os: ubuntu-latest
-            target: Android64
+        platform: [android64, android32]
 
-          - name: Android32
-            os: ubuntu-latest
-            target: Android32
-
-    name: ${{ matrix.config.name }}
-    runs-on: ${{ matrix.config.os }}
+    env:
+      GEODE_SDK: ${{ github.workspace }}/geode-sdk
+      CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm-cache
+      GEODE_VERSION: "5.8.1"
+      ANDROID_NDK: ${{ github.workspace }}/android-ndk-r28
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Build the mod
-        uses: geode-sdk/build-geode-mod@main
+      - name: Debug - verify mod.json exists
+        run: cat mod.json
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build zip
+
+      - name: Install Geode CLI
+        uses: geode-sdk/cli/.github/actions/setup@main
         with:
-          combine: true
-          target: ${{ matrix.config.target }}
+          version: latest
 
-  package:
-    name: Package builds
-    runs-on: ubuntu-latest
-    needs: ["build"]
+      - name: Setup dummy Geode profile
+        run: |
+          mkdir -p dummy_profile
+          geode profile add --name dummy dummy_profile/GeometryDash.exe win
 
-    steps:
-      - uses: geode-sdk/build-geode-mod/combine@main
-        id: build
+      - name: Install Geode SDK (${{ env.GEODE_VERSION }})
+        run: |
+          geode sdk install "$GEODE_SDK"
+          geode sdk update ${{ env.GEODE_VERSION }}
+          geode sdk install-binaries --platform android64 --version ${{ env.GEODE_VERSION }}
+          geode sdk install-binaries --platform android32 --version ${{ env.GEODE_VERSION }}
 
-      - uses: actions/upload-artifact@v4
+      - name: Download Android NDK r28
+        run: |
+          wget -q https://dl.google.com/android/repository/android-ndk-r28-linux.zip
+          unzip -q android-ndk-r28-linux.zip -d ${{ github.workspace }}
+          echo "ANDROID_NDK=${{ github.workspace }}/android-ndk-r28" >> $GITHUB_ENV
+
+      - name: Patch nontype_functional in CPM cache
+        run: |
+          rm -rf $CPM_SOURCE_CACHE/nontype_functional
+          mkdir -p $CPM_SOURCE_CACHE/nontype_functional
+          git clone https://github.com/zhihaoy/nontype_functional $CPM_SOURCE_CACHE/nontype_functional/aaa0
+          cd $CPM_SOURCE_CACHE/nontype_functional/aaa0
+          sed -i 's/std::is_trivially_default_constructible_v<D>/std::is_trivially_default_constructible<D>::value/g' include/std23/move_only_function.h
+          sed -i 's/std::is_trivially_default_constructible_v<[^>]*>/std::is_trivially_default_constructible<\u0001>::value/g' include/std23/move_only_function.h || true
+
+      - name: Build mod
+        run: |
+          geode build \
+            -p ${{ matrix.platform }} \
+            --config Release \
+            --ndk "$ANDROID_NDK" \
+            -- \
+            -DGEODE_UNITY_BUILD=OFF
+
+      - name: Debug build outputs
+        run: |
+          find build-* -maxdepth 2 -type f | sort
+
+      - name: Upload artifact (${{ matrix.platform }})
+        uses: actions/upload-artifact@v4
         with:
-          name: Build Output
-          path: ${{ steps.build.outputs.build-output }}
+          name: Mousse-${{ matrix.platform }}
+          path: build-${{ matrix.platform }}/*.geode
+          if-no-files-found: error
