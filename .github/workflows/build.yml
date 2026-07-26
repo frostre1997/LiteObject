@@ -62,7 +62,7 @@ jobs:
           geode build \
             -p android64 \
             --config Release \
-            -- profile dummy \
+            --profile dummy \
             --ndk "$ANDROID_NDK" \
             -- \
             -DGEODE_UNITY_BUILD=OFF
