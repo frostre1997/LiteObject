@@ -1,8 +1,8 @@
-# -Lag
+# LiteObject
 
 ### Smooth Geometry Dash
 
--Lag is a lightweight performance mod for Geometry Dash built with Geode. Its goal is simple: reduce unnecessary visual overhead and provide a smoother gameplay experience, especially on demanding levels.
+LiteObject is a lightweight performance mod for Geometry Dash built with Geode. Its goal is simple: reduce unnecessary visual overhead and provide a smoother gameplay experience, especially on demanding levels.
 
 ---
 
@@ -58,7 +58,7 @@ Enable or disable features directly from the Geode settings menu.
 
 ## Performance Notes
 
--Lag focuses on reducing visual effects and unnecessary rendering overhead.
+LiteObject focuses on reducing visual effects and unnecessary rendering overhead.
 
 Results may vary depending on:
 - Hardware specifications
@@ -76,7 +76,7 @@ The largest improvements are typically seen in:
 
 ## Compatibility
 
--Lag is designed for modern versions of Geometry Dash and Geode.
+LiteObject is designed for modern versions of Geometry Dash and Geode.
 
 Compatible with most mods that do not directly modify rendering systems.
 
@@ -89,12 +89,11 @@ cmake -B build
 cmake --build build --config Release
 ```
 
-The compiled `.geode` file will be generated in the build output directory.
+The compiled .geode file will be generated in the build output directory.
 
 ---
 
 ## Roadmap
-
 - [ ] Advanced particle optimization
 - [ ] Shader reduction mode
 - [ ] Decoration culling
@@ -106,18 +105,26 @@ The compiled `.geode` file will be generated in the build output directory.
 
 ## Contributing
 
-Contributions, suggestions, and bug reports are welcome.
-
-Feel free to open an issue or submit a pull request.
+- Contributions, suggestions, and bug reports are welcome.
+- Feel free to open an issue or submit a pull request.
 
 ---
 
 ## License
-
 This project is licensed under the MIT License.
 
 ---
 
-# -Lag
+## Credits
 
-### Less Effects. More FPS.
+- Original concept and performance optimizations inspired by [MinusLag](https://github.com/doodleGDnow/MinusLag) by [doodleGDnow](https://github.com/doodleGDnow).
+- Built using the [Geode SDK](https://geode-sdk.org/).
+- Maintained by [frostre1997](https://github.com/frostre1997).
+
+LiteObject is a reimagined performance mod based on ideas from MinusLag, adapted and extended for better handling of high object count and visual effects.
+
+---
+
+## LiteObject
+
+Less Effects. More FPS.
